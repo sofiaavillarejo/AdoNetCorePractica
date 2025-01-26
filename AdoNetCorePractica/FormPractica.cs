@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdoNetCorePractica.Models;
 using AdoNetCorePractica.Repositories;
 
 namespace AdoNetCorePractica
@@ -30,10 +32,18 @@ namespace AdoNetCorePractica
             }
         }
 
-        private void cmbHospitales_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cmbHospitales_SelectedIndexChanged(object sender, EventArgs e)
         {
             string nombreHosp = this.cmbHospitales.SelectedItem.ToString();
-
+            EmpleadosHospital empleados = await this.repo.MostrarEmpleadosAsync(nombreHosp);
+            this.lstEmpleados.Items.Clear();
+            foreach (string datos in empleados.DatosEmpleados)
+            {
+                this.lstEmpleados.Items.Add(datos);
+            }
+            this.txtSuma.Text = empleados.SumaSalarial.ToString();
+            this.txtMedia.Text = empleados.MediaSalarial.ToString();
+            this.txtPersonas.Text = empleados.Personas.ToString();
         }
     }
 }

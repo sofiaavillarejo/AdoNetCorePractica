@@ -8,9 +8,8 @@ namespace AdoNetCorePractica.Models
 {
     public class EmpleadosHospital
     {
-        public string Apellido { get; set; }
-        public string Empleo { get; set; }
-        public int Salario { get; set; }
+
+        public List<string> DatosEmpleados { get; set; }
         public int SumaSalarial { get; set; }
         public int MediaSalarial { get; set; }
         public int Personas { get; set; }
